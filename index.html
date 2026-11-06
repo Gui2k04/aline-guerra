@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aline Guerra | Energia solar por assinatura</title>
+<meta name="description" content="Pague menos pelo mesmo kWh. Energia solar por assinatura em Goiânia, sem investir nada e sem instalar placas.">
+<meta name="theme-color" content="#24533F">
+<meta property="og:title" content="Aline Guerra | Energia solar por assinatura">
+<meta property="og:description" content="Pague menos pelo mesmo kWh, sem investir nada e sem instalar placas.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="foto.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2324533F'/%3E%3Ccircle cx='32' cy='38' r='14' fill='%23F2B42C'/%3E%3Cpath d='M0 46c14-8 26-8 32-4s20 6 32-2v24H0z' fill='%23367256'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --leaf-deep: oklch(0.31 0.06 160);
+    --leaf:      oklch(0.39 0.075 158);
+    --leaf-2:    oklch(0.48 0.09 155);
+    --leaf-3:    oklch(0.59 0.11 150);
+    --sun:       oklch(0.82 0.155 80);
+    --sun-deep:  oklch(0.72 0.15 70);
+    --sun-soft:  oklch(0.94 0.06 88);
+    --grid:      oklch(0.55 0.02 250);
+    --grid-soft: oklch(0.92 0.01 250);
+    --mist:      oklch(0.965 0.016 140);
+    --paper:     oklch(0.99 0.008 95);
+    --line:      oklch(0.88 0.025 145);
+    --ink:       oklch(0.25 0.03 158);
+    --muted:     oklch(0.45 0.03 158);
+    --on-leaf:   oklch(0.97 0.012 140);
+    --on-leaf-2: oklch(0.87 0.035 150);
+    --on-sun:    oklch(0.28 0.05 70);
+    --display: "Bricolage Grotesque", ui-rounded, sans-serif;
+    --body: "Nunito Sans", ui-sans-serif, sans-serif;
+    --ease-out: cubic-bezier(.16,1,.3,1);
+    color-scheme: light;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    font-family:var(--body);font-size:17px;line-height:1.55;
+    color:var(--ink);background:var(--mist);min-height:100vh;
+    padding-bottom:calc(96px + env(safe-area-inset-bottom));
+  }
+  img{display:block;max-width:100%}
+  picture{display:block}
+  a{color:inherit}
+  .wrap{max-width:460px;margin:0 auto;padding:0 16px}
+  .tnum{font-variant-numeric:tabular-nums}
+
+  /* HERO */
+  .hero{background:var(--leaf);color:var(--on-leaf);text-align:center;overflow:hidden;padding-top:calc(40px + env(safe-area-inset-top))}
+  .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,13vw,56px);line-height:.95;letter-spacing:-.035em}
+  .hero .role{margin-top:12px;font-family:var(--display);font-weight:500;font-size:20px;line-height:1.25;color:var(--sun)}
+  .hero .pitch{margin:14px auto 0;max-width:30ch;color:var(--on-leaf-2);font-size:16.5px}
+  .sunrise{position:relative;height:250px;margin-top:8px}
+  .rays{
+    position:absolute;left:50%;bottom:-42px;width:360px;height:360px;margin-left:-180px;
+    background:repeating-conic-gradient(from -2deg at 50% 50%, oklch(0.82 0.155 80 / .26) 0deg 4deg, transparent 4deg 18deg);
+    -webkit-mask:radial-gradient(circle at 50% 50%, transparent 96px, #000 98px, #000 120px, transparent 158px);
+            mask:radial-gradient(circle at 50% 50%, transparent 96px, #000 98px, #000 120px, transparent 158px);
+    border-radius:50%;
+  }
+  .sun-photo{
+    position:absolute;left:50%;bottom:52px;width:172px;height:172px;margin-left:-86px;
+    border-radius:50%;padding:6px;background:var(--sun);
+    box-shadow:0 0 0 10px oklch(0.82 0.155 80 / .22), 0 0 0 22px oklch(0.82 0.155 80 / .1);
+  }
+  .sun-photo picture,.sun-photo img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+  .hills{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:120px}
+  .hills .h1{fill:var(--leaf-3)} .hills .h2{fill:var(--leaf-2)} .hills .h3{fill:var(--mist)}
+  @media (prefers-reduced-motion:no-preference){
+    .sun-photo{animation:rise 1.4s var(--ease-out) both .15s}
+    .rays{animation:rise 1.4s var(--ease-out) both .15s, spin 90s linear infinite 1.6s}
+  }
+  @keyframes rise{from{transform:translateY(110px)}to{transform:translateY(0)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* Botões */
+  .links{list-style:none;display:flex;flex-direction:column;gap:10px;padding-top:8px}
+  .btn{
+    display:flex;align-items:center;gap:14px;width:100%;min-height:64px;
+    padding:10px 16px 10px 10px;border-radius:999px;text-decoration:none;text-align:left;
+    font:inherit;cursor:pointer;border:2px solid var(--leaf);background:var(--paper);color:var(--ink);
+    transition:transform .15s var(--ease-out), background-color .15s var(--ease-out);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .btn:active{transform:scale(.975)}
+  :is(.btn,.faq summary,.share,.dock a,.next,.chip):focus-visible{outline:3px solid var(--sun-deep);outline-offset:3px}
+  .btn .ico{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--leaf);color:var(--on-leaf)}
+  .btn .ico svg{width:23px;height:23px}
+  .btn .txt{flex:1;min-width:0}
+  .btn strong{display:block;font-weight:800;font-size:17px;line-height:1.2}
+  .btn small{display:block;color:var(--muted);font-size:14px;line-height:1.3}
+  .btn .go{flex:none;width:18px;height:18px;color:var(--leaf-2)}
+  .btn.primary{background:var(--sun);border-color:var(--sun);min-height:72px}
+  .btn.primary strong{font-size:19px}
+  .btn.primary .ico{background:var(--leaf-deep);color:var(--sun)}
+  .btn.primary small{color:var(--on-sun)}
+  .btn.primary .go{color:var(--leaf-deep)}
+  .share{
+    display:block;margin:14px auto 0;background:none;border:0;font:inherit;font-size:15px;font-weight:700;
+    color:var(--leaf);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;
+    cursor:pointer;padding:8px 12px;min-height:44px;
+  }
+
+  /* Seções */
+  section{padding-top:60px}
+  h2{font-family:var(--display);font-weight:800;font-size:31px;line-height:1.05;letter-spacing:-.025em;color:var(--leaf)}
+  .lead{margin-top:10px;color:var(--muted);max-width:38ch}
+
+  /* O preço do kWh */
+  .kwh-explain{margin-top:14px;color:var(--muted);max-width:40ch}
+  .race{margin-top:26px;display:flex;flex-direction:column;gap:22px}
+  .lane h3{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:16px;font-weight:800;line-height:1.25;margin-bottom:9px}
+  .lane h3 small{font-weight:600;color:var(--muted);font-size:14px;display:block}
+  .lane .price{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;letter-spacing:-.02em;white-space:nowrap}
+  .lane .price span{font-size:15px;font-family:var(--body);font-weight:700;letter-spacing:0;color:var(--muted)}
+  .bar{height:24px;border-radius:999px;background:var(--grid-soft);overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:999px;transform-origin:left center}
+  .lane.grid .price{color:var(--grid)}
+  .lane.grid .bar i{background:var(--grid);width:100%}
+  .lane.solar .price{color:var(--leaf)}
+  .lane.solar .bar{background:var(--sun-soft)}
+  .lane.solar .bar i{background:var(--sun);width:var(--w,70%)}
+  @media (prefers-reduced-motion:no-preference){
+    .race.on .bar i{animation:grow 1.1s var(--ease-out) both}
+    .race.on .lane.solar .bar i{animation-delay:.3s}
+  }
+  @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .race-note{margin-top:20px;display:flex;gap:12px;align-items:flex-start;font-size:16px}
+  .race-note svg{flex:none;width:26px;height:26px;color:var(--sun-deep);margin-top:1px}
+
+  /* Calculadora */
+  .calc-band{margin-top:60px;background:var(--leaf);color:var(--on-leaf);padding:52px 0 64px;scroll-margin-top:0}
+  .calc-band h2{color:var(--on-leaf)}
+  .calc-band .lead{color:var(--on-leaf-2)}
+  .bill{position:relative;margin-top:34px;background:var(--paper);color:var(--ink);padding:24px 20px 22px}
+  .bill::before,.bill::after{
+    content:"";position:absolute;left:0;right:0;height:10px;
+    background:radial-gradient(circle at 8px 10px, transparent 7px, var(--paper) 7.5px) 0 0/16px 10px repeat-x;
+  }
+  .bill::before{top:-9px}
+  .bill::after{bottom:-9px;transform:scaleY(-1)}
+  .stamp{
+    position:absolute;right:14px;top:-28px;width:86px;height:86px;border-radius:50%;
+    border:3px solid var(--leaf-2);color:var(--leaf-2);background:var(--paper);
+    display:grid;place-items:center;text-align:center;
+    font-family:var(--display);font-weight:800;font-size:12.5px;line-height:1.1;transform:rotate(12deg);
+  }
+  .bill label{display:block;font-weight:800;font-size:17px;padding-right:90px}
+  .bill .hint{display:block;font-size:14px;color:var(--muted);font-weight:600;margin-top:2px;padding-right:90px}
+  .amount{display:flex;align-items:baseline;gap:6px;margin-top:14px;font-family:var(--display);font-weight:800}
+  .amount span{font-size:22px}
+  .amount output{font-size:50px;line-height:1;letter-spacing:-.03em}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;margin-top:6px;background:transparent;cursor:pointer}
+  input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:999px;background:linear-gradient(to right, var(--leaf) var(--p,12%), var(--line) var(--p,12%))}
+  input[type=range]::-moz-range-track{height:10px;border-radius:999px;background:var(--line)}
+  input[type=range]::-moz-range-progress{height:10px;border-radius:999px;background:var(--leaf)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:32px;height:32px;margin-top:-11px;border-radius:50%;background:var(--sun);border:4px solid var(--leaf-deep)}
+  input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--sun);border:4px solid var(--leaf-deep)}
+  input[type=range]:focus-visible{outline:3px solid var(--sun-deep);outline-offset:4px;border-radius:999px}
+  .chips{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:4px}
+  .chip{min-height:44px;padding:0 4px;white-space:nowrap;border-radius:999px;border:1.5px solid var(--line);background:var(--mist);color:var(--ink);font:inherit;font-weight:700;font-size:14.5px;cursor:pointer}
+  .chip[aria-pressed=true]{background:var(--leaf);border-color:var(--leaf);color:var(--on-leaf)}
+  .result{margin-top:22px;border-top:2px solid var(--ink)}
+  .result dl{display:grid;grid-template-columns:1fr auto;column-gap:12px}
+  .result dt,.result dd{padding:12px 0;border-bottom:1px dashed var(--line);font-size:16px}
+  .result dt{color:var(--muted)}
+  .result dd{font-weight:800;text-align:right}
+  .result dd.strike{color:var(--grid);text-decoration:line-through;text-decoration-thickness:2px}
+  .win{margin-top:16px;padding:16px 18px 18px;background:var(--sun-soft);border-radius:18px}
+  .win p{font-weight:700;font-size:15.5px}
+  .win .big{display:block;margin-top:2px;font-family:var(--display);font-weight:800;font-size:clamp(34px,10vw,44px);line-height:1.05;letter-spacing:-.03em;color:var(--leaf)}
+  .win .year{margin-top:8px;color:var(--on-sun);font-weight:600}
+  .fine{margin-top:14px;font-size:13.5px;color:var(--muted);line-height:1.45}
+  .calc-band .btn{margin-top:36px}
+
+  /* Apresentação */
+  .me figure{margin:0 0 22px;border-radius:28px 28px 28px 120px;overflow:hidden;background:var(--leaf);aspect-ratio:720/795}
+  .me figure img{width:100%;height:100%;object-fit:cover}
+
+  /* Como funciona */
+  .steps{list-style:none;counter-reset:step;margin-top:22px}
+  .steps li{counter-increment:step;position:relative;padding:0 0 26px 58px}
+  .steps li::before{
+    content:counter(step);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;
+    background:var(--sun);color:var(--leaf-deep);font-family:var(--display);font-weight:800;font-size:20px;display:grid;place-items:center;
+  }
+  .steps li:not(:last-child)::after{
+    content:"";position:absolute;left:19px;top:46px;bottom:6px;width:2px;
+    background:repeating-linear-gradient(to bottom, var(--leaf-3) 0 4px, transparent 4px 9px);
+  }
+  .steps h3{font-size:18px;font-weight:800;line-height:1.3;padding-top:7px}
+  .steps p{color:var(--muted);font-size:16px;margin-top:3px}
+  .next{
+    display:inline-flex;align-items:center;min-height:48px;padding:0 20px;margin:4px 0 0 58px;
+    border-radius:999px;border:2px solid var(--leaf);color:var(--leaf);font-weight:800;font-size:15.5px;line-height:1.25;text-decoration:none;
+    transition:background-color .15s var(--ease-out), color .15s var(--ease-out);
+  }
+
+  /* Depoimentos */
+  .quotes ul{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:22px}
+  .quotes blockquote{font-family:var(--display);font-weight:500;font-size:20px;line-height:1.35}
+  .quotes blockquote::before{content:"\201C";color:var(--sun-deep);font-weight:800;margin-right:2px}
+  .quotes blockquote::after{content:"\201D";color:var(--sun-deep);font-weight:800}
+  .quotes figcaption{margin-top:8px;color:var(--muted);font-size:15px;font-weight:700}
+
+  /* Dúvidas */
+  .faq h2{margin-bottom:10px}
+  .faq details{border-bottom:1.5px solid var(--line)}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 0;font-weight:800;font-size:17px;line-height:1.35}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq .plus{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--leaf);color:var(--leaf);display:grid;place-items:center;transition:transform .3s var(--ease-out), background-color .2s}
+  .faq .plus svg{width:14px;height:14px}
+  .faq details[open] .plus{transform:rotate(45deg);background:var(--leaf);color:var(--on-leaf)}
+  .faq p{padding:0 40px 18px 0;color:var(--muted);font-size:16px}
+
+  /* Fechamento */
+  .closing{padding-top:64px;text-align:center}
+  .closing .big{font-family:var(--display);font-weight:800;font-size:clamp(36px,11vw,46px);line-height:.98;letter-spacing:-.035em;color:var(--leaf)}
+  .closing p{margin:12px auto 22px;color:var(--muted);max-width:30ch}
+  footer{text-align:center;color:var(--muted);font-size:14px;padding:36px 0 8px}
+
+  /* Barra fixa */
+  .dock{
+    position:fixed;left:0;right:0;bottom:0;z-index:10;padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    background:linear-gradient(to top, var(--mist) 60%, oklch(0.965 0.016 140 / 0));
+    transform:translateY(110%);transition:transform .45s var(--ease-out);pointer-events:none;
+  }
+  .dock.show{transform:translateY(0);pointer-events:auto}
+  .dock a{max-width:428px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;border-radius:999px;background:var(--leaf);color:var(--on-leaf);font-weight:800;font-size:17px;text-decoration:none}
+  .dock a svg{width:24px;height:24px;color:var(--sun)}
+  @media (prefers-reduced-motion:reduce){.dock{transition:none}}
+  .toast{
+    position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translateX(-50%);
+    background:var(--ink);color:var(--on-leaf);padding:10px 18px;border-radius:999px;font-size:15px;font-weight:700;
+    opacity:0;pointer-events:none;transition:opacity .2s;z-index:11;
+  }
+  .toast.show{opacity:1}
+  @media (hover:hover) and (pointer:fine){
+    .btn:hover{background:var(--sun-soft)}
+    .btn.primary:hover{background:var(--sun-deep);border-color:var(--sun-deep)}
+    .next:hover{background:var(--leaf);color:var(--on-leaf)}
+    .dock a:hover{background:var(--leaf-deep)}
+    .chip:hover{border-color:var(--leaf)}
+  }
+</style>
+</head>
+<body>
+
+<!-- Ícones. O de conversa (#ic-wa) aparece em todos os botões de WhatsApp.
+     Para usar o ícone oficial do WhatsApp, baixe o SVG em whatsappbrand.com
+     e troque o conteúdo do <symbol id="ic-wa">. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-wa" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.4 8.4 0 1 1 21 11.5z"/>
+    <circle cx="8.7" cy="11.5" r="1.2" fill="currentColor"/><circle cx="12.4" cy="11.5" r="1.2" fill="currentColor"/><circle cx="16.1" cy="11.5" r="1.2" fill="currentColor"/>
+  </symbol>
+  <symbol id="ic-go" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="ic-plus" viewBox="0 0 14 14"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M7 1.5v11M1.5 7h11"/></symbol>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Aline Guerra</h1>
+    <p class="role">Energia solar por assinatura em Goiânia</p>
+    <p class="pitch">Pague menos pelo mesmo kWh, sem investir nada e sem instalar placas.</p>
+  </div>
+  <div class="sunrise">
+    <div class="rays" aria-hidden="true"></div>
+    <div class="sun-photo"><picture><source srcset="avatar.webp" type="image/webp"><img src="avatar.jpg" alt="Foto de Aline Guerra" width="160" height="160" fetchpriority="high" decoding="async"></picture></div>
+    <svg class="hills" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true">
+      <path class="h1" d="M0 62 C60 30 120 34 200 58 S340 30 400 46 V120 H0Z"/>
+      <path class="h2" d="M0 86 C80 62 150 74 230 82 S350 64 400 74 V120 H0Z"/>
+      <path class="h3" d="M0 120 V104 C120 94 280 94 400 104 V120Z"/>
+    </svg>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <ul class="links" id="links">
+      <li>
+        <a class="btn primary wa-contato" href="https://wa.me/5562985785222?text=Oi%2C%20Aline%21%20Vi%20sua%20p%C3%A1gina%20e%20quero%20saber%20do%20desconto%20na%20minha%20conta%20de%20luz." target="_blank" rel="noopener">
+          <span class="ico"><svg aria-hidden="true"><use href="#ic-wa"/></svg></span>
+          <span class="txt"><strong>Quero meu desconto</strong><small>Fale comigo no WhatsApp</small></span>
+          <svg class="go" aria-hidden="true"><use href="#ic-go"/></svg>
+        </a>
+      </li>
+      <li>
+        <a class="btn" href="#calculo">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8.5 6.5h7M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h3.5"/></svg></span>
+          <span class="txt"><strong>Calcular minha economia</strong><small>Aqui mesmo, em segundos</small></span>
+          <svg class="go" aria-hidden="true" style="transform:rotate(90deg)"><use href="#ic-go"/></svg>
+        </a>
+      </li>
+      <li>
+        <a class="btn" id="lnk-insta" href="https://instagram.com/aguerraenergiasolar" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></span>
+          <span class="txt"><strong>Instagram</strong><small id="insta-handle">@aguerraenergiasolar</small></span>
+          <svg class="go" aria-hidden="true"><use href="#ic-go"/></svg>
+        </a>
+      </li>
+      <li>
+        <button class="btn" id="btn-contato" type="button">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+          <span class="txt"><strong>Salvar meu contato</strong><small>Adiciona na agenda do seu celular</small></span>
+          <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v12M6 12l6 6 6-6"/></svg>
+        </button>
+      </li>
+    </ul>
+    <button class="share" id="btn-share" type="button">Compartilhar esta página</button>
+
+    <section aria-labelledby="t-kwh">
+      <h2 id="t-kwh">A mesma energia, por um preço menor</h2>
+      <p class="kwh-explain">Sua conta de luz cobra pela energia que você gasta no mês, medida em <strong>kWh</strong>. Cada kWh tem um preço. Veja a diferença:</p>
+      <div class="race" id="race">
+        <div class="lane grid">
+          <h3><span>Na conta normal<small>Energia comum da distribuidora</small></span><span class="price tnum"><b id="p-rede">R$ 1,15</b> <span>/kWh</span></span></h3>
+          <div class="bar"><i></i></div>
+        </div>
+        <div class="lane solar">
+          <h3><span>Com a assinatura solar<small>Energia de uma usina solar</small></span><span class="price tnum"><b id="p-solar">R$ 0,92</b> <span>/kWh</span></span></h3>
+          <div class="bar"><i id="bar-solar"></i></div>
+        </div>
+      </div>
+      <p class="race-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+        <span>A energia chega pelos mesmos fios de sempre. Muda só o preço de cada kWh: até <strong id="pct-txt">20%</strong> mais barato.</span>
+      </p>
+    </section>
+  </div>
+
+  <section class="calc-band" id="calculo" aria-labelledby="t-calc">
+    <div class="wrap">
+      <h2 id="t-calc">Quanto você economizaria</h2>
+      <p class="lead">Arraste até o valor da sua conta de luz hoje.</p>
+      <div class="bill">
+        <div class="stamp" aria-hidden="true">Energia<br>do sol</div>
+        <label for="conta">Sua conta de luz hoje</label>
+        <span class="hint">Valor médio por mês</span>
+        <div class="amount"><span>R$</span><output id="conta-out" for="conta" class="tnum">300</output></div>
+        <input type="range" id="conta" min="80" max="2000" step="10" value="300" aria-describedby="calc-fine">
+        <div class="chips" role="group" aria-label="Valores comuns de conta">
+          <button class="chip" type="button" data-v="150">R$ 150</button>
+          <button class="chip" type="button" data-v="300">R$ 300</button>
+          <button class="chip" type="button" data-v="600">R$ 600</button>
+          <button class="chip" type="button" data-v="1000">R$ 1.000</button>
+        </div>
+        <div class="result" aria-live="polite">
+          <dl>
+            <dt>Energia que você usa</dt><dd class="tnum" id="r-kwh">261 kWh</dd>
+            <dt>Hoje você paga</dt><dd class="tnum strike" id="r-hoje">R$ 300</dd>
+            <dt>Com a assinatura</dt><dd class="tnum" id="r-solar">R$ 255</dd>
+          </dl>
+          <div class="win">
+            <p>Você deixa de pagar</p>
+            <strong class="big tnum" id="r-mes">R$ 45 por mês</strong>
+            <p class="year">Em um ano, são <strong class="tnum" id="r-ano">R$ 540</strong> que ficam com você.</p>
+          </div>
+        </div>
+        <p class="fine" id="calc-fine">Valores aproximados. O desconto exato depende da sua conta e sai na simulação, sem compromisso.</p>
+      </div>
+      <a class="btn primary wa-simular" href="https://wa.me/5562985785222?text=Oi%2C%20Aline%21%20Quero%20simular%20meu%20desconto.%20Vou%20te%20mandar%20uma%20foto%20da%20minha%20conta%20de%20luz." target="_blank" rel="noopener">
+        <span class="ico"><svg aria-hidden="true"><use href="#ic-wa"/></svg></span>
+        <span class="txt"><strong>Fazer a simulação exata</strong><small>Mande a foto da conta no WhatsApp</small></span>
+        <svg class="go" aria-hidden="true"><use href="#ic-go"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="me" aria-labelledby="t-me">
+      <figure><picture><source srcset="foto.webp" type="image/webp"><img src="foto.jpg" alt="Aline Guerra segurando seu crachá de licenciada" width="720" height="795" loading="lazy" decoding="async"></picture></figure>
+      <h2 id="t-me">Oi, eu sou a Aline</h2>
+      <p class="lead">Me chama no WhatsApp que eu explico como funciona e faço a simulação do seu desconto com você, sem compromisso.</p>
+    </section>
+
+    <section aria-labelledby="t-como">
+      <h2 id="t-como">Como funciona</h2>
+      <ol class="steps">
+        <li><h3>Você me manda sua conta de luz</h3><p>Com ela eu vejo quantos kWh você usa e calculo sua economia.</p></li>
+        <li><h3>Fazemos sua adesão</h3><p>Sem obra e sem placa no seu telhado. Você não precisa mudar nada em casa.</p></li>
+        <li><h3>Você paga menos pelo kWh</h3><p>A energia de uma usina solar entra no lugar da energia comum, e o desconto aparece todo mês.</p></li>
+      </ol>
+      <a class="next wa-simular" href="https://wa.me/5562985785222?text=Oi%2C%20Aline%21%20Quero%20simular%20meu%20desconto.%20Vou%20te%20mandar%20uma%20foto%20da%20minha%20conta%20de%20luz." target="_blank" rel="noopener">Mandar minha conta de luz</a>
+    </section>
+
+    <section class="quotes" id="quotes" aria-labelledby="t-quotes" hidden>
+      <h2 id="t-quotes">Quem já economiza</h2>
+      <ul id="quotes-list"></ul>
+    </section>
+
+    <section class="faq" aria-labelledby="t-faq">
+      <h2 id="t-faq">Dúvidas comuns</h2>
+      <details><summary>Preciso instalar placas solares?<span class="plus" aria-hidden="true"><svg><use href="#ic-plus"/></svg></span></summary>
+        <p>Não. As placas ficam numa usina solar. A energia dela chega pela rede que já existe na sua casa.</p></details>
+      <details><summary>Tenho que pagar algo para começar?<span class="plus" aria-hidden="true"><svg><use href="#ic-plus"/></svg></span></summary>
+        <p>Não. Não existe investimento inicial para entrar na assinatura.</p></details>
+      <details><summary>A energia da minha casa muda?<span class="plus" aria-hidden="true"><svg><use href="#ic-plus"/></svg></span></summary>
+        <p>Não. Continua chegando pelos mesmos fios, sem troca de relógio. O que muda é o preço do kWh.</p></details>
+      <details><summary>Onde vejo quantos kWh eu uso?<span class="plus" aria-hidden="true"><svg><use href="#ic-plus"/></svg></span></summary>
+        <p>Na sua conta de luz, como "consumo" em kWh. Se preferir, me manda a foto da conta que eu olho para você.</p></details>
+    </section>
+
+    <section class="closing" id="closing" aria-labelledby="t-fim">
+      <h2 class="big" id="t-fim">Vamos baixar sua conta?</h2>
+      <p>Mande uma foto da sua conta de luz e eu faço a simulação para você.</p>
+      <a class="btn primary wa-simular" href="https://wa.me/5562985785222?text=Oi%2C%20Aline%21%20Quero%20simular%20meu%20desconto.%20Vou%20te%20mandar%20uma%20foto%20da%20minha%20conta%20de%20luz." target="_blank" rel="noopener">
+        <span class="ico"><svg aria-hidden="true"><use href="#ic-wa"/></svg></span>
+        <span class="txt"><strong>Quero meu desconto</strong><small>Resposta pelo WhatsApp</small></span>
+        <svg class="go" aria-hidden="true"><use href="#ic-go"/></svg>
+      </a>
+    </section>
+
+    <footer>Aline Guerra, energia solar por assinatura em Goiânia</footer>
+  </div>
+</main>
+
+<div class="dock" id="dock">
+  <a class="wa-contato" href="https://wa.me/5562985785222?text=Oi%2C%20Aline%21%20Vi%20sua%20p%C3%A1gina%20e%20quero%20saber%20do%20desconto%20na%20minha%20conta%20de%20luz." target="_blank" rel="noopener">
+    <svg aria-hidden="true"><use href="#ic-wa"/></svg>
+    Falar com a Aline no WhatsApp
+  </a>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  /* ====== DADOS DA PÁGINA: edite aqui ====== */
+  const CONFIG = {
+    nome: "Aline Guerra",
+    whatsapp: "5562985785222",          // 55 + DDD + número, só dígitos
+    instagram: "aguerraenergiasolar",
+    precoRede: 1.15,                    // R$ por kWh na conta normal, com impostos
+    // Desconto da assinatura sobre a conta (não aparece para o cliente):
+    // conta abaixo de R$ 350 → 15%; a partir de R$ 350 → 20%.
+    limiteFaixa: 350,
+    descontoMenor: 0.15,
+    descontoMaior: 0.20,
+    msgContato: "Oi, Aline! Vi sua página e quero saber do desconto na minha conta de luz.",
+    msgSimular: "Oi, Aline! Quero simular meu desconto. Vou te mandar uma foto da minha conta de luz.",
+    // Depoimentos REAIS de clientes. Enquanto ficar vazio, a seção não aparece.
+    // Exemplo: { texto: "Minha conta caiu já no primeiro mês.", nome: "Maria, Setor Bueno" }
+    depoimentos: []
+  };
+  /* ========================================= */
+
+  const $ = (id) => document.getElementById(id);
+  const brl = (v, cents) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL",
+    minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0 });
+  const wa = (msg) => "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(msg);
+
+  document.querySelectorAll(".wa-contato").forEach((a) => a.href = wa(CONFIG.msgContato));
+  document.querySelectorAll(".wa-simular").forEach((a) => a.href = wa(CONFIG.msgSimular));
+  $("lnk-insta").href = "https://instagram.com/" + CONFIG.instagram;
+  $("insta-handle").textContent = "@" + CONFIG.instagram;
+
+  /* Comparação do kWh */
+  const ratio = 1 - CONFIG.descontoMaior;
+  $("p-rede").textContent = brl(CONFIG.precoRede, true);
+  $("p-solar").textContent = brl(CONFIG.precoRede * ratio, true);
+  $("pct-txt").textContent = Math.round(CONFIG.descontoMaior * 100) + "%";
+  $("bar-solar").style.setProperty("--w", (ratio * 100).toFixed(1) + "%");
+  if ("IntersectionObserver" in window) {
+    const ro = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) { $("race").classList.add("on"); ro.disconnect(); }
+    }), { threshold: .6 });
+    ro.observe($("race"));
+  } else { $("race").classList.add("on"); }
+
+  /* Calculadora */
+  const range = $("conta"), chips = [...document.querySelectorAll(".chip")];
+  const calc = () => {
+    const conta = +range.value;
+    const kwh = conta / CONFIG.precoRede;
+    const desconto = conta < CONFIG.limiteFaixa ? CONFIG.descontoMenor : CONFIG.descontoMaior;
+    const solar = conta * (1 - desconto);
+    const mes = conta - solar;
+    $("conta-out").textContent = conta.toLocaleString("pt-BR");
+    $("r-kwh").textContent = Math.round(kwh).toLocaleString("pt-BR") + " kWh";
+    $("r-hoje").textContent = brl(conta);
+    $("r-solar").textContent = brl(Math.round(solar));
+    $("r-mes").textContent = brl(Math.round(mes)) + " por mês";
+    $("r-ano").textContent = brl(Math.round(mes * 12));
+    range.style.setProperty("--p", ((conta - range.min) / (range.max - range.min) * 100) + "%");
+    range.setAttribute("aria-valuetext", brl(conta) + " por mês");
+    chips.forEach((c) => c.setAttribute("aria-pressed", String(+c.dataset.v === conta)));
+  };
+  range.addEventListener("input", calc);
+  chips.forEach((c) => c.addEventListener("click", () => { range.value = c.dataset.v; calc(); }));
+  calc();
+
+  /* Depoimentos */
+  if (CONFIG.depoimentos.length) {
+    const ul = $("quotes-list");
+    CONFIG.depoimentos.forEach((d) => {
+      const li = document.createElement("li"), fig = document.createElement("figure");
+      const q = document.createElement("blockquote"), cap = document.createElement("figcaption");
+      q.textContent = d.texto; cap.textContent = d.nome;
+      fig.append(q, cap); li.append(fig); ul.append(li);
+    });
+    $("quotes").hidden = false;
+  }
+
+  const toast = (txt) => {
+    const t = $("toast");
+    t.textContent = txt; t.classList.add("show");
+    clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("show"), 2200);
+  };
+
+  /* Barra do WhatsApp: aparece depois dos botões do topo, some no fechamento */
+  if ("IntersectionObserver" in window) {
+    const seen = { links: true, closing: false };
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { seen[e.target.id] = e.isIntersecting; });
+      $("dock").classList.toggle("show", !seen.links && !seen.closing);
+    });
+    io.observe($("links")); io.observe($("closing"));
+  }
+
+  $("btn-contato").addEventListener("click", () => {
+    const vcf = ["BEGIN:VCARD","VERSION:3.0","FN:" + CONFIG.nome,"N:Guerra;Aline;;;",
+      "ORG:Energia solar por assinatura","TEL;TYPE=CELL:+" + CONFIG.whatsapp,
+      "URL:https://instagram.com/" + CONFIG.instagram,"END:VCARD"].join("\r\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([vcf], { type: "text/vcard" }));
+    a.download = "aline-guerra.vcf";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    toast("Contato baixado. Abra o arquivo para salvar.");
+  });
+
+  $("btn-share").addEventListener("click", async () => {
+    const data = { title: document.title, text: "Pague menos pelo mesmo kWh", url: location.href };
+    try {
+      if (navigator.share) { await navigator.share(data); return; }
+      await navigator.clipboard.writeText(location.href);
+      toast("Link copiado");
+    } catch (e) {
+      if (e && e.name !== "AbortError") toast("Não deu para compartilhar. Copie o endereço da página.");
+    }
+  });
+</script>
+</body>
+</html>
