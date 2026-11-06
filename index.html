@@ -9,7 +9,7 @@
 <meta property="og:title" content="Aline Guerra | Energia solar por assinatura">
 <meta property="og:description" content="Pague menos pelo mesmo kWh, sem investir nada e sem instalar placas.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="foto.jpg">
+<meta property="og:image" content="vestido.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2324533F'/%3E%3Ccircle cx='32' cy='38' r='14' fill='%23F2B42C'/%3E%3Cpath d='M0 46c14-8 26-8 32-4s20 6 32-2v24H0z' fill='%23367256'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,36 +52,49 @@
   .wrap{max-width:460px;margin:0 auto;padding:0 16px}
   .tnum{font-variant-numeric:tabular-nums}
 
-  /* HERO */
-  .hero{background:var(--leaf);color:var(--on-leaf);text-align:center;overflow:hidden;padding-top:calc(40px + env(safe-area-inset-top))}
-  .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,13vw,56px);line-height:.95;letter-spacing:-.035em}
-  .hero .role{margin-top:12px;font-family:var(--display);font-weight:500;font-size:20px;line-height:1.25;color:var(--sun)}
-  .hero .pitch{margin:14px auto 0;max-width:30ch;color:var(--on-leaf-2);font-size:16.5px}
-  .sunrise{position:relative;height:250px;margin-top:8px}
-  .rays{
-    position:absolute;left:50%;bottom:-42px;width:360px;height:360px;margin-left:-180px;
-    background:repeating-conic-gradient(from -2deg at 50% 50%, oklch(0.82 0.155 80 / .26) 0deg 4deg, transparent 4deg 18deg);
-    -webkit-mask:radial-gradient(circle at 50% 50%, transparent 96px, #000 98px, #000 120px, transparent 158px);
-            mask:radial-gradient(circle at 50% 50%, transparent 96px, #000 98px, #000 120px, transparent 158px);
+  /* HERO: ela na frente do sol */
+  .hero{background:var(--leaf);color:var(--on-leaf);text-align:center;overflow:hidden;padding-top:calc(34px + env(safe-area-inset-top))}
+  .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(44px,13.5vw,58px);line-height:.92;letter-spacing:-.035em}
+  .hero .role{margin-top:10px;font-family:var(--display);font-weight:500;font-size:clamp(17px,5.1vw,20px);text-wrap:balance;line-height:1.25;color:var(--sun)}
+  .stage{
+    position:relative;
+    width:min(100%, 430px);
+    margin:6px auto 0;
+    aspect-ratio:720/906;
+    isolation:isolate;
+  }
+  .sun{
+    position:absolute;z-index:0;
+    left:47%;top:30%;
+    width:86%;aspect-ratio:1;
+    transform:translate(-50%,-50%);
     border-radius:50%;
+    background:radial-gradient(circle at 50% 50%, var(--sun) 0 54%, oklch(0.82 0.155 80 / .28) 54.5% 63%, oklch(0.82 0.155 80 / .12) 63.5% 72%, transparent 72.5%);
   }
-  .sun-photo{
-    position:absolute;left:50%;bottom:52px;width:172px;height:172px;margin-left:-86px;
-    border-radius:50%;padding:6px;background:var(--sun);
-    box-shadow:0 0 0 10px oklch(0.82 0.155 80 / .22), 0 0 0 22px oklch(0.82 0.155 80 / .1);
+  .sun::before{
+    content:"";position:absolute;inset:-16%;border-radius:50%;
+    background:repeating-conic-gradient(from -2deg, oklch(0.82 0.155 80 / .22) 0deg 4deg, transparent 4deg 18deg);
+    -webkit-mask:radial-gradient(circle, transparent 47%, #000 48%, #000 60%, transparent 72%);
+            mask:radial-gradient(circle, transparent 47%, #000 48%, #000 60%, transparent 72%);
   }
-  .sun-photo picture,.sun-photo img{width:100%;height:100%;border-radius:50%;object-fit:cover}
-  .hills{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:120px}
-  .hills .h1{fill:var(--leaf-3)} .hills .h2{fill:var(--leaf-2)} .hills .h3{fill:var(--mist)}
+  .back-hill{position:absolute;z-index:1;left:-20%;right:-20%;bottom:0;height:34%}
+  .back-hill path{fill:var(--leaf-2)}
+  .back-hill path + path{fill:var(--leaf-3)}
+  .person{position:absolute;z-index:2;inset:0}
+  .person img{width:100%;height:100%;object-fit:contain;object-position:bottom center}
+  .front-wave{position:absolute;z-index:3;left:0;right:0;bottom:-1px;width:100%;height:56px}
+  .front-wave path{fill:var(--mist)}
+  .hero-foot{position:relative;z-index:4;background:var(--mist);color:var(--ink);padding:2px 0 0}
+  .hero-foot .pitch{margin:0 auto;max-width:30ch;font-size:17px;color:var(--muted);text-align:center}
   @media (prefers-reduced-motion:no-preference){
-    .sun-photo{animation:rise 1.4s var(--ease-out) both .15s}
-    .rays{animation:rise 1.4s var(--ease-out) both .15s, spin 90s linear infinite 1.6s}
+    .sun{animation:sunrise 1.6s var(--ease-out) both .1s}
+    .sun::before{animation:spin 100s linear infinite}
   }
-  @keyframes rise{from{transform:translateY(110px)}to{transform:translateY(0)}}
+  @keyframes sunrise{from{transform:translate(-50%,-50%) translateY(90px) scale(.9);opacity:0}to{transform:translate(-50%,-50%);opacity:1}}
   @keyframes spin{to{transform:rotate(360deg)}}
 
   /* Botões */
-  .links{list-style:none;display:flex;flex-direction:column;gap:10px;padding-top:8px}
+  .links{list-style:none;display:flex;flex-direction:column;gap:10px;padding-top:22px}
   .btn{
     display:flex;align-items:center;gap:14px;width:100%;min-height:64px;
     padding:10px 16px 10px 10px;border-radius:999px;text-decoration:none;text-align:left;
@@ -181,7 +194,7 @@
   .calc-band .btn{margin-top:36px}
 
   /* Apresentação */
-  .me figure{margin:0 0 22px;border-radius:28px 28px 28px 120px;overflow:hidden;background:var(--leaf);aspect-ratio:720/795}
+  .me figure{margin:0 0 22px;border-radius:28px 28px 28px 120px;overflow:hidden;background:var(--leaf);aspect-ratio:720/860}
   .me figure img{width:100%;height:100%;object-fit:cover}
 
   /* Como funciona */
@@ -269,18 +282,25 @@
   <div class="wrap">
     <h1>Aline Guerra</h1>
     <p class="role">Energia solar por assinatura em Goiânia</p>
-    <p class="pitch">Pague menos pelo mesmo kWh, sem investir nada e sem instalar placas.</p>
   </div>
-  <div class="sunrise">
-    <div class="rays" aria-hidden="true"></div>
-    <div class="sun-photo"><picture><source srcset="avatar.webp" type="image/webp"><img src="avatar.jpg" alt="Foto de Aline Guerra" width="160" height="160" fetchpriority="high" decoding="async"></picture></div>
-    <svg class="hills" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true">
-      <path class="h1" d="M0 62 C60 30 120 34 200 58 S340 30 400 46 V120 H0Z"/>
-      <path class="h2" d="M0 86 C80 62 150 74 230 82 S350 64 400 74 V120 H0Z"/>
-      <path class="h3" d="M0 120 V104 C120 94 280 94 400 104 V120Z"/>
+  <div class="stage">
+    <div class="sun" aria-hidden="true"></div>
+    <svg class="back-hill" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 40 C70 8 150 14 220 36 S350 10 400 22 V120 H0Z"/>
+      <path d="M0 78 C90 52 170 64 250 74 S360 56 400 66 V120 H0Z"/>
+    </svg>
+    <picture class="person">
+      <source srcset="aline.webp" type="image/webp">
+      <img src="aline.png" alt="Aline Guerra sorrindo e mostrando seu crachá" width="720" height="906" fetchpriority="high" decoding="async">
+    </picture>
+    <svg class="front-wave" viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 56 V30 C80 10 160 6 220 18 S340 40 400 22 V56Z"/>
     </svg>
   </div>
 </header>
+<div class="hero-foot">
+  <div class="wrap"><p class="pitch">Pague menos pelo mesmo kWh, sem investir nada e sem instalar placas.</p></div>
+</div>
 
 <main>
   <div class="wrap">
@@ -376,7 +396,7 @@
 
   <div class="wrap">
     <section class="me" aria-labelledby="t-me">
-      <figure><picture><source srcset="foto.webp" type="image/webp"><img src="foto.jpg" alt="Aline Guerra segurando seu crachá de licenciada" width="720" height="795" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source srcset="vestido.webp" type="image/webp"><img src="vestido.jpg" alt="Aline Guerra de vestido branco" width="720" height="860" loading="lazy" decoding="async"></picture></figure>
       <h2 id="t-me">Oi, eu sou a Aline</h2>
       <p class="lead">Me chama no WhatsApp que eu explico como funciona e faço a simulação do seu desconto com você, sem compromisso.</p>
     </section>
@@ -425,7 +445,7 @@
 <div class="dock" id="dock">
   <a class="wa-contato" href="https://wa.me/5562985785222?text=Oi%2C%20Aline%21%20Vi%20sua%20p%C3%A1gina%20e%20quero%20saber%20do%20desconto%20na%20minha%20conta%20de%20luz." target="_blank" rel="noopener">
     <svg aria-hidden="true"><use href="#ic-wa"/></svg>
-    Falar com a Aline no WhatsApp
+    Falar com a Aline
   </a>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -515,10 +535,13 @@
 
   /* Barra do WhatsApp: aparece depois dos botões do topo, some no fechamento */
   if ("IntersectionObserver" in window) {
-    const seen = { links: true, closing: false };
+    const seen = { passou: false, closing: false };
     const io = new IntersectionObserver((es) => {
-      es.forEach((e) => { seen[e.target.id] = e.isIntersecting; });
-      $("dock").classList.toggle("show", !seen.links && !seen.closing);
+      es.forEach((e) => {
+        if (e.target.id === "links") seen.passou = !e.isIntersecting && e.boundingClientRect.top < 0;
+        else seen.closing = e.isIntersecting;
+      });
+      $("dock").classList.toggle("show", seen.passou && !seen.closing);
     });
     io.observe($("links")); io.observe($("closing"));
   }
