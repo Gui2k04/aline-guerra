@@ -10,7 +10,7 @@
 <meta property="og:description" content="Pague menos pelo mesmo kWh, sem investir nada e sem instalar placas.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gui2k04.github.io/aline-guerra/">
-<meta property="og:image" content="https://gui2k04.github.io/aline-guerra/preview.jpg?v=6">
+<meta property="og:image" content="https://gui2k04.github.io/aline-guerra/preview.jpg?v=7">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Aline Guerra, energia solar por assinatura em Goiânia">
@@ -145,10 +145,16 @@
   .lane.grid .bar i{background:var(--grid);width:100%}
   .lane.solar .price{color:var(--leaf)}
   .lane.solar .bar{background:var(--sun-soft)}
-  .lane.solar .bar i{background:var(--sun);width:var(--w,70%)}
+  .lane.solar .bar{position:relative}
+  .lane.solar .bar::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w2,80%);
+    border-radius:999px;background:oklch(0.82 0.155 80 / .45);transform-origin:left center;
+  }
+  .lane.solar .bar i{position:relative;background:var(--sun);width:var(--w,70%)}
   @media (prefers-reduced-motion:no-preference){
     .race.on .bar i{animation:grow 1.1s var(--ease-out) both}
     .race.on .lane.solar .bar i{animation-delay:.3s}
+    .race.on .lane.solar .bar::before{animation:grow 1.1s var(--ease-out) both .3s}
   }
   @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   .race-note{margin-top:20px;display:flex;gap:12px;align-items:flex-start;font-size:16px}
@@ -196,15 +202,6 @@
   .win p{font-weight:700;font-size:15.5px}
   .win .big{display:block;margin-top:2px;font-family:var(--display);font-weight:800;font-size:clamp(34px,10vw,44px);line-height:1.05;letter-spacing:-.03em;color:var(--leaf)}
   .win .year{margin-top:8px;color:var(--on-sun);font-weight:600}
-  .amount input{
-    width:100%;min-width:0;border:0;background:transparent;color:var(--ink);
-    font:inherit;font-size:50px;line-height:1;letter-spacing:-.03em;padding:0;
-    border-bottom:2px dashed var(--line);
-  }
-  .amount input:focus{outline:none;border-bottom-color:var(--leaf)}
-  .note{padding:16px 18px;margin-top:16px;background:var(--sun-soft);border-radius:18px;font-weight:700;color:var(--on-sun)}
-  .note strong{display:block;font-family:var(--display);font-weight:800;font-size:22px;line-height:1.15;color:var(--leaf);margin-bottom:4px}
-  .lane.solar .bar{background:linear-gradient(to right, transparent 0 70%, oklch(0.82 0.155 80 / .45) 70% 80%, var(--sun-soft) 80%)}
   .fine{margin-top:14px;font-size:13.5px;color:var(--muted);line-height:1.45}
   .calc-band .btn{margin-top:36px}
 
@@ -296,7 +293,7 @@
 <header class="hero">
   <div class="wrap">
     <h1>Aline Guerra</h1>
-    <p class="role">Energia solar por assinatura em Goiânia</p>
+    <p class="role">Energia solar por assinatura</p>
   </div>
   <div class="stage">
     <div class="sun" aria-hidden="true"></div>
@@ -305,8 +302,8 @@
       <path d="M0 78 C90 52 170 64 250 74 S360 56 400 66 V120 H0Z"/>
     </svg>
     <picture class="person">
-      <source srcset="aline.webp?v=6" type="image/webp">
-      <img src="aline.png?v=6" alt="Aline Guerra sorrindo, de vestido branco" width="1290" height="1555" fetchpriority="high" decoding="async">
+      <source srcset="aline.webp?v=7" type="image/webp">
+      <img src="aline.png?v=7" alt="Aline Guerra sorrindo, de vestido branco" width="1290" height="1555" fetchpriority="high" decoding="async">
     </picture>
     <svg class="front-wave" viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0 56 V30 C80 10 160 6 220 18 S340 40 400 22 V56Z"/>
@@ -374,22 +371,20 @@
   <section class="calc-band" id="calculo" aria-labelledby="t-calc">
     <div class="wrap">
       <h2 id="t-calc">Quanto você economizaria</h2>
-      <p class="lead">Arraste ou digite o valor da sua fatura de luz hoje.</p>
+      <p class="lead">Arraste até o valor da sua fatura de luz hoje.</p>
       <div class="bill">
         <div class="stamp" aria-hidden="true">Energia<br>do sol</div>
-        <label for="conta-in">Sua fatura de luz hoje</label>
+        <label for="conta">Sua fatura de luz hoje</label>
         <span class="hint">Valor médio por mês</span>
-        <div class="amount"><span>R$</span><input id="conta-in" class="tnum" type="text" inputmode="numeric" autocomplete="off" value="600" aria-describedby="calc-fine"></div>
-        <input type="range" id="conta" min="0" max="1000" step="1" value="463" aria-label="Valor da fatura" aria-describedby="calc-fine">
+        <div class="amount"><span>R$</span><output id="conta-out" for="conta" class="tnum">600</output></div>
+        <input type="range" id="conta" min="0" max="1000" step="1" value="233" aria-label="Valor da fatura" aria-describedby="calc-fine">
         <div class="chips" role="group" aria-label="Valores comuns de fatura">
-          <button class="chip" type="button" data-v="400">R$ 400</button>
-          <button class="chip" type="button" data-v="800">R$ 800</button>
-          <button class="chip" type="button" data-v="2000">R$ 2 mil</button>
-          <button class="chip" type="button" data-v="7000">R$ 7 mil</button>
+          <button class="chip" type="button" data-v="300">R$ 300</button>
+          <button class="chip" type="button" data-v="600">R$ 600</button>
+          <button class="chip" type="button" data-v="1000">R$ 1.000</button>
+          <button class="chip" type="button" data-v="5000">R$ 5.000</button>
         </div>
         <div class="result" aria-live="polite">
-          <div class="note" id="r-msg" hidden></div>
-          <div id="r-ok">
           <dl>
             <dt>Energia que você usa</dt><dd class="tnum" id="r-kwh">522 kWh</dd>
             <dt>Hoje você paga</dt><dd class="tnum strike" id="r-hoje">R$ 600</dd>
@@ -399,7 +394,6 @@
             <p>Você deixa de pagar</p>
             <strong class="big tnum" id="r-mes">R$ 120 por mês</strong>
             <p class="year">Em um ano, são <strong class="tnum" id="r-ano">R$ 1.440</strong> que ficam com você.</p>
-          </div>
           </div>
         </div>
         <p class="fine" id="calc-fine">Valores aproximados. O desconto exato depende da sua fatura e sai na simulação, sem compromisso.</p>
@@ -414,7 +408,7 @@
 
   <div class="wrap">
     <section class="me" aria-labelledby="t-me">
-      <figure><picture><source srcset="vestido.webp?v=6" type="image/webp"><img src="vestido.jpg?v=6" alt="Aline Guerra de vestido branco" width="1290" height="1541" loading="lazy" decoding="async"></picture></figure>
+      <figure><picture><source srcset="vestido.webp?v=7" type="image/webp"><img src="vestido.jpg?v=7" alt="Aline Guerra de vestido branco" width="1290" height="1541" loading="lazy" decoding="async"></picture></figure>
       <h2 id="t-me">Oi, eu sou a Aline</h2>
       <p class="lead">Me chama no WhatsApp que eu explico como funciona e faço a simulação do seu desconto com você, sem compromisso.</p>
     </section>
@@ -477,13 +471,13 @@
     precoRede: 1.15,                    // R$ por kWh na fatura normal, com impostos
     descontoMin: 0.20,                  // faixa mostrada na comparação do kWh
     descontoMax: 0.30,
-    // Faixas de desconto da calculadora (as regras não aparecem para o cliente)
-    faturaMinima: 250,                  // abaixo disso não atende
+    // Faixas de desconto da calculadora (as regras não aparecem para o cliente).
+    // A régua vai de R$ 250 a R$ 10.000.
     faixas: [
-      { ate: 1000,  desconto: 0.20 },   // R$ 250 a R$ 1.000
-      { ate: 5000,  desconto: 0.22 },   // R$ 1.001 a R$ 5.000
+      { ate: 2000,  desconto: 0.20 },   // R$ 250 a R$ 2.000
+      { ate: 5000,  desconto: 0.22 },   // R$ 2.001 a R$ 5.000
       { ate: 10000, desconto: 0.25 }    // R$ 5.001 a R$ 10.000
-    ],                                  // acima de R$ 10.000: análise pela média de kWh
+    ],                                  // acima de R$ 10.000: análise pela média de kWh (fora da régua)
     msgContato: "Oi, Aline! Vi sua página e quero saber do desconto na minha fatura de luz.",
     msgSimular: "Oi, Aline! Quero simular meu desconto. Vou te mandar uma foto da minha fatura de luz.",
     // Depoimentos REAIS de clientes. Enquanto ficar vazio, a seção não aparece.
@@ -508,6 +502,7 @@
   $("p-solar").textContent = "R$ " + cents(CONFIG.precoRede * (1 - CONFIG.descontoMax)) + " a " + cents(CONFIG.precoRede * (1 - CONFIG.descontoMin));
   $("pct-txt").textContent = Math.round(CONFIG.descontoMin * 100) + "% a " + Math.round(CONFIG.descontoMax * 100) + "%";
   $("bar-solar").style.setProperty("--w", ((1 - CONFIG.descontoMax) * 100).toFixed(1) + "%");
+  $("bar-solar").parentElement.style.setProperty("--w2", ((1 - CONFIG.descontoMin) * 100).toFixed(1) + "%");
   if ("IntersectionObserver" in window) {
     const ro = new IntersectionObserver((es) => es.forEach((e) => {
       if (e.isIntersecting) { $("race").classList.add("on"); ro.disconnect(); }
@@ -516,10 +511,10 @@
   } else { $("race").classList.add("on"); }
 
   /* Calculadora
-     A régua não é linear: o começo vai de R$ 100 a R$ 1.000 com mais precisão,
-     e o fim chega a R$ 12.000. */
-  const range = $("conta"), input = $("conta-in"), chips = [...document.querySelectorAll(".chip")];
-  const pts = [[0,100],[100,250],[550,1000],[850,5000],[1000,12000]];
+     A régua não é linear: a primeira metade cobre R$ 250 a R$ 1.000 (onde está a
+     maioria das faturas) e o restante vai até R$ 10.000. */
+  const range = $("conta"), chips = [...document.querySelectorAll(".chip")];
+  const pts = [[0,250],[500,1000],[800,5000],[1000,10000]];
   const toValor = (pos) => {
     for (let i = 1; i < pts.length; i++) if (pos <= pts[i][0]) {
       const [p0,v0] = pts[i-1], [p1,v1] = pts[i];
@@ -530,7 +525,6 @@
     return pts[pts.length-1][1];
   };
   const toPos = (v) => {
-    v = Math.min(Math.max(v, pts[0][1]), pts[pts.length-1][1]);
     for (let i = 1; i < pts.length; i++) if (v <= pts[i][1]) {
       const [p0,v0] = pts[i-1], [p1,v1] = pts[i];
       return Math.round(p0 + (p1 - p0) * (v - v0) / (v1 - v0));
@@ -539,38 +533,22 @@
   };
   const descontoDe = (v) => {
     for (const f of CONFIG.faixas) if (v <= f.ate) return f.desconto;
-    return null;
+    return CONFIG.faixas[CONFIG.faixas.length - 1].desconto;
   };
   const show = (v) => {
-    const ok = $("r-ok"), msg = $("r-msg");
-    range.style.setProperty("--p", (range.value / 10) + "%");
-    range.setAttribute("aria-valuetext", brl(v) + " por mês");
-    chips.forEach((c) => c.setAttribute("aria-pressed", String(+c.dataset.v === v)));
-    if (!v || v < CONFIG.faturaMinima) {
-      ok.hidden = true; msg.hidden = false;
-      msg.innerHTML = "<strong>Atendemos faturas a partir de " + brl(CONFIG.faturaMinima) + "</strong>Se a sua fatura chega perto disso em alguns meses, me chama que eu olho com você.";
-      return;
-    }
-    const desconto = descontoDe(v);
-    if (desconto === null) {
-      ok.hidden = true; msg.hidden = false;
-      msg.innerHTML = "<strong>Fatura acima de " + brl(CONFIG.faixas[CONFIG.faixas.length-1].ate) + "</strong>Nesse caso eu faço uma análise pela média de kWh que você consome. Me mande sua fatura que eu calculo a sua economia.";
-      return;
-    }
-    ok.hidden = false; msg.hidden = true;
-    const solar = v * (1 - desconto), mes = v - solar;
+    const solar = v * (1 - descontoDe(v)), mes = v - solar;
+    $("conta-out").textContent = v.toLocaleString("pt-BR");
     $("r-kwh").textContent = Math.round(v / CONFIG.precoRede).toLocaleString("pt-BR") + " kWh";
     $("r-hoje").textContent = brl(v);
     $("r-solar").textContent = brl(Math.round(solar));
     $("r-mes").textContent = brl(Math.round(mes)) + " por mês";
     $("r-ano").textContent = brl(Math.round(mes * 12));
+    range.style.setProperty("--p", (range.value / 10) + "%");
+    range.setAttribute("aria-valuetext", brl(v) + " por mês");
+    chips.forEach((c) => c.setAttribute("aria-pressed", String(+c.dataset.v === v)));
   };
-  const lerValor = () => parseInt(input.value.replace(/\D/g, ""), 10) || 0;
-  range.addEventListener("input", () => { const v = toValor(+range.value); input.value = v.toLocaleString("pt-BR"); show(v); });
-  input.addEventListener("input", () => { const v = lerValor(); range.value = toPos(v); show(v); });
-  input.addEventListener("blur", () => { const v = lerValor(); if (v) input.value = v.toLocaleString("pt-BR"); });
-  input.addEventListener("focus", () => input.select());
-  chips.forEach((c) => c.addEventListener("click", () => { const v = +c.dataset.v; range.value = toPos(v); input.value = v.toLocaleString("pt-BR"); show(v); }));
+  range.addEventListener("input", () => show(toValor(+range.value)));
+  chips.forEach((c) => c.addEventListener("click", () => { const v = +c.dataset.v; range.value = toPos(v); show(v); }));
   range.value = toPos(600); show(600);
 
   /* Depoimentos */
